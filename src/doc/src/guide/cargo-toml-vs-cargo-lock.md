@@ -51,9 +51,10 @@ so Cargo could know exactly which revision to use when building the package:
 regex = { git = "https://github.com/rust-lang/regex.git", rev = "9f9f693" }
 ```
 
-Now our builds will be the same. But there’s a big drawback: now we have to
-manually think about SHA-1s every time we want to update our library. This is
-both tedious and error prone.
+Now our builds will be reproducible and yield the same result everytime.
+But there’s a big drawback: now we have to manually keep track of the used
+revisions and update the SHA-1 values every time we want to update our library.
+This is both tedious and error prone.
 
 Enter the `Cargo.lock`. Because of its existence, we don’t need to manually
 keep track of the exact revisions: Cargo will do it for us. When we have a
@@ -98,8 +99,8 @@ $ cargo update            # updates all dependencies
 $ cargo update -p regex   # updates just “regex”
 ```
 
-This will write out a new `Cargo.lock` with the new version information. Note
-that the argument to `cargo update` is actually a
+This will write out a new `Cargo.lock` with the new version information.
+Note that the argument passed to `cargo update` is actually called a
 [Package ID Specification](../reference/pkgid-spec.md) and `regex` is just a
 short specification.
 
